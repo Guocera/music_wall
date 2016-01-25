@@ -1,0 +1,16 @@
+<h1>Music</h1>
+
+<% @songs.each do |song| %>
+  <% search = "#{song.title.split(" ").join("+")}+by+#{song.artist.name.split(" ").join("+")}" %>
+  <div class="songs">
+    <h3><a href="https://www.youtube.com/results?search_query=<%= search %>"><%= song.title %></a>
+    <small>(by: <%= song.artist.name %>)</small></h3>
+    <% if song.url %>
+      <p><a href="http://<%= song.url %>"><%= song.url %></a></p>
+    <% end %>
+  </div>
+<% end %>
+
+<form action="/music/new">
+  <input type="submit" value="Add songs" />
+</form>

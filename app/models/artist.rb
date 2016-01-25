@@ -1,4 +1,4 @@
-class Author < ActiveRecord::Base
+class Artist < ActiveRecord::Base
   has_many :songs
 
   validates :name, presence: true

@@ -1,5 +1,5 @@
 class Song < ActiveRecord::Base
-  belongs_to :author
+  belongs_to :artist
 
   validates :title, presence: true
 end
