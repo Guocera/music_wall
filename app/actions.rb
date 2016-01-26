@@ -61,7 +61,6 @@ post '/music/signup' do
   end
 end
 
-
 post '/music/login' do
   @user = User.new(
     email: params[:email],
@@ -74,4 +73,9 @@ post '/music/login' do
   else
     erb :'/music/signup'
   end
+end
+
+post '/music/logout' do
+  session[:user] = nil
+  redirect '/music'
 end
