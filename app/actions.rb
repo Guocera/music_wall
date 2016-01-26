@@ -53,12 +53,12 @@ post '/music/signup' do
     email: params[:email],
     password: params[:password]
   )
-
-  if @user.save
-    redirect '/music'
+  if User.find_by(email: params[:email])
+    @user.errors.add(:email, 'already taken.')
   else
-    erb :'/music/signup'
+    redirect '/music' if @user.save
   end
+  erb :'/music/signup'
 end
 
 post '/music/login' do
