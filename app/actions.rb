@@ -1,9 +1,13 @@
+enable :sessions
+
+
 # Homepage (Root path)
 get '/' do
   erb :index
 end
 
 get '/music' do
+  session[:user] ||= nil
   @songs = Song.all
   pp @songs
   erb :'music/index'
@@ -21,9 +25,9 @@ get '/music/signup' do
   erb :'music/signup'
 end
 
-get '/music/signin' do
+get '/music/login' do
   @user = User.new
-  erb :'music/signin'
+  erb :'music/login'
 end
 
 post '/music/new' do
@@ -58,13 +62,14 @@ post '/music/signup' do
 end
 
 
-post '/music/signin' do
+post '/music/login' do
   @user = User.new(
     email: params[:email],
     password: params[:password]
   )
 
   if @user.save
+    session[:user] = params[:email]
     redirect '/music'
   else
     erb :'/music/signup'

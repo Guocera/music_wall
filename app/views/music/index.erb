@@ -1,4 +1,5 @@
-<h1>Music</h1>
+<h1>Moosic</h1>
+<h2>Welcome <%= "#{session[:user] || 'Guest'}" %></h2>
 
 <% @songs.each do |song| %>
   <% if song.url == "" %>
@@ -16,8 +17,8 @@
   <input type="submit" value="Add songs" />
 </form>
 
-<form action="/music/signin">
-  <input type="submit" value="Signin" />
+<form action="/music/login">
+  <input type="submit" value="Login" />
 </form>
 
 <form action="/music/signup">
