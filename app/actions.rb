@@ -3,11 +3,12 @@ enable :sessions
 
 # Homepage (Root path)
 get '/' do
+    session[:email] ||= nil
   erb :index
 end
 
 get '/music' do
-  session[:email] ||= nil
+  session[:expires] = 1.week.from_now
   @songs = Song.all
   erb :'music/index'
 end
@@ -86,6 +87,6 @@ post '/music/login' do
 end
 
 post '/music/logout' do
-  session[:email] = nil
+  session.clear
   redirect '/music'
 end
