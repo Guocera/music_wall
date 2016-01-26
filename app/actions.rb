@@ -21,6 +21,11 @@ get '/music/signup' do
   erb :'music/signup'
 end
 
+get '/music/signin' do
+  @user = User.new
+  erb :'music/signin'
+end
+
 post '/music/new' do
   @artist = Artist.find_or_initialize_by(
     name: params[:artist]
@@ -36,5 +41,32 @@ post '/music/new' do
     redirect '/music'
   else
     erb :'/music/new'
+  end
+end
+
+post '/music/signup' do
+  @user = User.new(
+    email: params[:email],
+    password: params[:password]
+  )
+
+  if @user.save
+    redirect '/music'
+  else
+    erb :'/music/signup'
+  end
+end
+
+
+post '/music/signin' do
+  @user = User.new(
+    email: params[:email],
+    password: params[:password]
+  )
+
+  if @user.save
+    redirect '/music'
+  else
+    erb :'/music/signup'
   end
 end
