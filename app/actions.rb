@@ -62,16 +62,26 @@ post '/music/signup' do
 end
 
 post '/music/login' do
-  @user = User.new(
-    email: params[:email],
-    password: params[:password]
-  )
+  @user = User.find_by(email: params[:email])
 
-  if @user.save
-    session[:user] = params[:email]
-    redirect '/music'
+  if @user 
+    if params[:password] == @user.password
+      session[:user] = params[:email]
+      redirect '/music'
+    else
+      @user = User.new(
+        email: params[:email],
+        password: params[:password]
+      )
+      @user.errors.add(:password, 'is incorrect.')
+      erb :'/music/login'
+    end
   else
-    erb :'/music/signup'
+    @user = User.create(
+      email: params[:email],
+      password: params[:password]
+    )  
+    erb :'/music/login'
   end
 end
 

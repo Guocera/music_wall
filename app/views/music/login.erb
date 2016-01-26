@@ -2,7 +2,6 @@
 
 <% if @user && @user.errors.any? %>
   <div>
-    <strong>Some missing info for your song, please fix them:</strong>
     <ul>
       <% @user.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -14,7 +13,7 @@
 <form action="/music/login" method="post">
   <div>
     <label for="">Email:
-      <input type="text" name="email" />
+      <input type="text" name="email" value="<%= @user.email %>" />
     </label>
   </div>
   <div>

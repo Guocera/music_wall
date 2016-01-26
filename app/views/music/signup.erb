@@ -2,7 +2,7 @@
 
 <% if @user && @user.errors.any? %>
   <div>
-    <strong>Some missing info for your song, please fix them:</strong>
+    <strong>Some missing info for signup, please fix them:</strong>
     <ul>
       <% @user.errors.full_messages.each do |message| %>
         <li><%= message %></li>
