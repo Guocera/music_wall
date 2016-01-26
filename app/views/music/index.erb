@@ -1,13 +1,14 @@
 <h1>Music</h1>
 
 <% @songs.each do |song| %>
-  <% search = "#{song.title.split(" ").join("+")}+by+#{song.artist.name.split(" ").join("+")}" %>
+  <% if song.url == "" %>
+    <% song_url = "https://www.youtube.com/results?search_query=#{song.title.gsub(" ", "+")}+by+#{song.artist.name.gsub(" ","+")}" %>
+  <% else %>
+    <% song_url = song.url %>
+  <% end %>
   <div class="songs">
-    <h3><a href="https://www.youtube.com/results?search_query=<%= search %>"><%= song.title %></a>
+    <h3><a href="<%= song_url %>"><%= song.title %></a>
     <small>(by: <%= song.artist.name %>)</small></h3>
-    <% if song.url %>
-      <p><a href="http://<%= song.url %>"><%= song.url %></a></p>
-    <% end %>
   </div>
 <% end %>
 

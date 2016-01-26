@@ -28,6 +28,8 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-nav (0.2.4)
+      pry (>= 0.9.10, < 0.11.0)
     puma (2.15.3)
     rack (1.6.4)
     rack-protection (1.5.3)
@@ -77,6 +79,7 @@ PLATFORMS
 DEPENDENCIES
   activesupport
   pry
+  pry-nav
   puma
   rake
   shotgun
@@ -85,3 +88,6 @@ DEPENDENCIES
   sinatra-contrib
   sqlite3
   tux
+
+BUNDLED WITH
+   1.11.2

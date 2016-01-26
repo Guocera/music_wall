@@ -1,17 +1,31 @@
+<% if @song && @song.errors.any? || @artist && @artist.errors.any? %>
+  <div>
+    <strong>Some missing info for your song, please fix them:</strong>
+    <ul>
+      <% @song.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      <% @artist.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <form action="/music" method="post">
   <div>
     <label for="">Title:
-      <input type="text" name="title" />
+      <input type="text" name="title" value="<%= @song.title %>" />
     </label>
   </div>
   <div>
     <label for="">Artist:
-      <input type="text" name="artist" />
+      <input type="text" name="artist" value="<%= @artist.name %>" />
     </label>
   </div>
   <div>
     <label for="">Url:
-      <input type="text" name="url" placeholder="Optional" />
+      <input type="text" name="url" value="<%= @song.url %>" placeholder="Optional" />
     </label>
   </div>
   <div>
