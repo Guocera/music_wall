@@ -20,3 +20,8 @@ desc 'Retrieves the current schema version number'
 task "db:version" do
   puts "Current version: #{ActiveRecord::Migrator.current_version}"
 end
+
+desc 'Drops, create, & migrate database'
+task "db:d" do
+  bundle exec "rake db:drop db:create"
+end

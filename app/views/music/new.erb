@@ -6,20 +6,22 @@
         <li><%= message %></li>
       <% end %>
       <% @artist.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <% unless message == 'Songs is invalid' %>
+          <li><%= message %></li>
+        <% end %>
       <% end %>
     </ul>
   </div>
 <% end %>
 
-<form action="/music" method="post">
+<form action="/music/new" method="post">
   <div>
     <label for="">Title:
       <input type="text" name="title" value="<%= @song.title %>" />
     </label>
   </div>
   <div>
-    <label for="">Artist:
+    <label for="">Artist name:
       <input type="text" name="artist" value="<%= @artist.name %>" />
     </label>
   </div>

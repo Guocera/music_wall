@@ -16,21 +16,23 @@ get '/music/new' do
   erb :'music/new'
 end
 
-post '/music' do
-  @artist = Artist.new(
+get '/music/signup' do
+  @user = User.new
+  erb :'music/signup'
+end
+
+post '/music/new' do
+  @artist = Artist.find_or_initialize_by(
     name: params[:artist]
   )
-  artist_saved = @artist.save
-  pp artist_saved, @artist
-  @song = Song.new(
+
+  @song = @artist.songs.new(
     title: params[:title],
-    artist: @artist,
     url: params[:url]  
   )
-  song_saved = @song.save
-  pp song_saved, @song
-  
-  if artist_saved && song_saved
+
+  if @artist.save
+    @song.save
     redirect '/music'
   else
     erb :'/music/new'
