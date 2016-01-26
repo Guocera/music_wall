@@ -1,5 +1,5 @@
 <h1>Moosic</h1>
-<h2>Welcome <%= "#{session[:user] || 'Guest'}" %></h2>
+<h2>Welcome <%= "#{session[:email] || 'Guest'}" %></h2>
 
 <% @songs.each do |song| %>
   <% if song.url == "" %>
@@ -9,14 +9,11 @@
   <% end %>
   <div class="songs">
     <h3><a href="<%= song_url %>"><%= song.title %></a>
-    <small>(by: <%= song.artist.name %>)</small></h3>
+    <small>by: <%= song.artist.name %> (posted by: <%= song.user.email %>)</small></h3>
   </div>
 <% end %>
 
-<form action="/music/new">
-  <input type="submit" value="Add songs" />
-</form>
-<% if session[:user] == nil %>
+<% if session[:email] == nil %>
   <form action="/music/login">
     <input type="submit" value="Login" />
   </form>
@@ -24,6 +21,9 @@
     <input type="submit" value="Signup" />
   </form>
 <% else %>
+  <form action="/music/new">
+    <input type="submit" value="Add songs" />
+  </form>
   <form action="/music/logout" method="post">
     <input type="submit" value="Logout" />
   </form>

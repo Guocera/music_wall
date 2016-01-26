@@ -7,9 +7,8 @@ get '/' do
 end
 
 get '/music' do
-  session[:user] ||= nil
+  session[:email] ||= nil
   @songs = Song.all
-  pp @songs
   erb :'music/index'
 end
 
@@ -37,7 +36,8 @@ post '/music/new' do
 
   @song = @artist.songs.new(
     title: params[:title],
-    url: params[:url]  
+    url: params[:url],
+    user: User.find_by(email: session[:email])
   )
 
   if @artist.save
@@ -66,7 +66,7 @@ post '/music/login' do
 
   if @user 
     if params[:password] == @user.password
-      session[:user] = params[:email]
+      session[:email] = params[:email]
       redirect '/music'
     else
       @user = User.new(
@@ -86,6 +86,6 @@ post '/music/login' do
 end
 
 post '/music/logout' do
-  session[:user] = nil
+  session[:email] = nil
   redirect '/music'
 end
