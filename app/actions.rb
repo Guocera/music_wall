@@ -74,14 +74,15 @@ post '/music/login' do
         email: params[:email],
         password: params[:password]
       )
-      @user.errors.add(:password, 'is incorrect.')
+      @user.errors.add(:email, 'or Password was incorrect.')
       erb :'/music/login'
     end
   else
-    @user = User.create(
+    @user = User.new(
       email: params[:email],
       password: params[:password]
-    )  
+    )
+    @user.errors.add(:email, 'or Password was incorrect.')  
     erb :'/music/login'
   end
 end

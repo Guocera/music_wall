@@ -15,16 +15,16 @@
 
 <% if session[:email] == nil %>
   <form action="/music/login">
-    <input type="submit" name="login" value="Login" />
+    <input type="submit" value="Login" />
   </form>
   <form action="/music/signup">
-    <input type="submit" name="signup" value="Signup" />
+    <input type="submit" value="Signup" />
   </form>
 <% else %>
   <form action="/music/new">
-    <input type="submit" name="add_songs" value="Add songs" />
+    <input type="submit" value="Add songs" />
   </form>
   <form action="/music/logout" method="post">
-    <input type="submit" name="logout" value="Logout" />
+    <input type="submit" value="Logout" />
   </form>
 <% end %>
